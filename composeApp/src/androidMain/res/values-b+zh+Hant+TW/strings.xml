@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">專題應用程式</string>
+    <string name="navigate_back">返回</string>
+    <string name="switch_language">切換語言</string>
+    <string name="lang_translated_name_x_default">系統預設</string>
+    <string name="lang_translated_name_en_us">英語</string>
+    <string name="lang_translated_name_zh_hant_tw">繁體中文</string>
+    <string name="about">關於</string>
+    <string name="select_photo">選取相片</string>
+    <string name="about_app">關於%1$s</string>
+    <string name="app_version">版本 %1$s</string>
+    <string name="processing">正在處理……</string>
+    <string name="result_success">成功！</string>
+</resources>

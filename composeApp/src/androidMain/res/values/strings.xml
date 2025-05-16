@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Project app</string>
+    <string name="navigate_back">Back</string>
+    <string name="switch_language">Switch language</string>
+    <string name="lang_translated_name_x_default">System default</string>
+    <string name="lang_local_name_en_us" translatable="false">English</string>
+    <string name="lang_translated_name_en_us">English</string>
+    <string name="lang_local_name_zh_hant_tw" translatable="false">繁體中文</string>
+    <string name="lang_translated_name_zh_hant_tw">Mandarin - Traditional Han script</string>
+    <string name="about">About</string>
+    <string name="select_photo">Select photo</string>
+    <string name="about_app">About %1$s</string>
+    <string name="app_version">Version %1$s</string>
+    <string name="processing">Processing…</string>
+    <string name="result_success">Success!</string>
+</resources>
