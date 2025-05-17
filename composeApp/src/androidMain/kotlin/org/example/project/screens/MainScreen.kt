@@ -9,18 +9,13 @@ import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowRight
-import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,13 +35,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import org.example.project.R
 import org.example.project.composables.LanguageDropdownMenu
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
+    onMenuOpen: () -> Unit = {},
     onNavigateAbout: () -> Unit = {},
     onNavigateProcessing: () -> Unit = {}
 ) {
@@ -57,8 +52,6 @@ fun MainScreen(
             }
         }
 
-    var shouldShowOptionMenu: Boolean by remember { mutableStateOf(value = false) }
-
     var shouldShowLanguagePicker: Boolean by remember { mutableStateOf(value = false) }
 
     Scaffold(
@@ -67,64 +60,19 @@ fun MainScreen(
                 title = {
                     Text(text = stringResource(id = R.string.app_name))
                 },
-                actions = {
-                    IconButton(onClick = { shouldShowOptionMenu = true }) {
+                navigationIcon = {
+                    IconButton(onClick = onMenuOpen) {
                         Icon(
-                            imageVector = Icons.Filled.MoreVert,
-                            contentDescription = stringResource(id = R.string.switch_language)
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = stringResource(id = R.string.menu_action_open)
                         )
                     }
-
-                    DropdownMenu(
-                        expanded = shouldShowOptionMenu,
-                        onDismissRequest = { shouldShowOptionMenu = false }
-                    ) {
-                        DropdownMenuItem(
-                            text = {
-                                Column(modifier = Modifier.padding(horizontal = 2.dp, vertical = 10.dp)) {
-                                    Text(
-                                        text = stringResource(id = R.string.switch_language),
-                                        style = MaterialTheme.typography.titleMedium
-                                    )
-                                }
-                            },
-                            onClick = {
-                                shouldShowOptionMenu = false
-                                shouldShowLanguagePicker = true
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Outlined.Language,
-                                    contentDescription = null
-                                )
-                            },
-                            trailingIcon = {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Filled.ArrowRight,
-                                    contentDescription = null
-                                )
-                            }
-                        )
-
-                        DropdownMenuItem(
-                            text = {
-                                Column(modifier = Modifier.padding(horizontal = 2.dp, vertical = 10.dp)) {
-                                    Text(
-                                        text = stringResource(id = R.string.about),
-                                        style = MaterialTheme.typography.titleMedium
-                                    )
-                                }
-                            },
-                            onClick = {
-                                shouldShowOptionMenu = false
-                                onNavigateAbout()
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Outlined.Info,
-                                    contentDescription = null
-                                )
-                            }
+                },
+                actions = {
+                    IconButton(onClick = { shouldShowLanguagePicker = true }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Language,
+                            contentDescription = stringResource(id = R.string.switch_language)
                         )
                     }
 

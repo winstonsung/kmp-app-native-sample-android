@@ -1,17 +1,27 @@
 package org.example.project.screens
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
+import android.net.Uri
+import androidx.activity.compose.ManagedActivityResultLauncher
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,29 +33,28 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.example.project.R
+import org.example.project.composables.LanguageDropdownMenu
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreen(
+fun MapScreen(
     onMenuOpen: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = stringResource(
-                            id = R.string.about_app,
-                            stringResource(R.string.app_name)
-                        )
-                    )
+                    Text(text = stringResource(id = R.string.menu_item_map))
                 },
                 navigationIcon = {
                     IconButton(onClick = onMenuOpen) {
@@ -58,35 +67,13 @@ fun AboutScreen(
             )
         },
         content = { innerPadding ->
-            LazyColumn(
-                modifier = Modifier.consumeWindowInsets(innerPadding),
-                contentPadding = innerPadding
+            Column(
+                modifier = Modifier.padding(paddingValues = innerPadding)
+                    .fillMaxSize()
+                    .wrapContentSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                item {
-                    Column(
-                        modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_launcher_round),
-                            contentDescription = null,
-                            modifier = Modifier.padding(bottom = 16.dp).size(size = 180.dp)
-                        )
-
-                        Text(
-                            text = stringResource(id = R.string.app_name),
-                            style = MaterialTheme.typography.headlineSmall
-                        )
-
-                        Text(
-                            text = stringResource(
-                                id = R.string.app_version,
-                                "1.0.0"
-                            ),
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
-                    }
-                }
             }
         }
     )
@@ -103,7 +90,7 @@ fun AboutScreen(
     showBackground = true
 )
 @Composable
-fun AboutScreenPreview() {
+fun MapScreenPreview() {
     MaterialTheme(
         colorScheme = if (isSystemInDarkTheme()) {
             darkColorScheme()
@@ -112,7 +99,7 @@ fun AboutScreenPreview() {
         }
     ) {
         Surface {
-            AboutScreen()
+            MainScreen()
         }
     }
 }
